@@ -2,39 +2,39 @@ package apartment.ejar.services.jwtService;
 
 import apartment.ejar.controllers.jwtController.LoginResponse;
 import apartment.ejar.entities.Broker;
+import apartment.ejar.entities.BrokerRoles;
 import apartment.ejar.entities.Role;
 import apartment.ejar.repositories.BrokerRepository;
+import apartment.ejar.repositories.BrokerRolesRepository;
 import apartment.ejar.repositories.RoleRepository;
 import apartment.ejar.security.JwtProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import apartment.ejar.util.Constants;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EjarService {
 
-    @Autowired
     private BrokerRepository brokerRepository;
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    private BrokerRolesRepository brokerRolesRepository;
+
     private RoleRepository roleRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
     private JwtProvider jwtProvider;
-    @Autowired
+
     private LoginResponse loginResponse;
 
     public Optional<String> signin(String username, String password) {
@@ -59,11 +59,35 @@ public class EjarService {
         return brokerRepository.findByUsername(username).isPresent();
     }
 
-    public Broker setRoles(Broker broker) {
-        List<Role> jsonRoles = broker.getRoles();
-        List<Role> roles = new ArrayList<>();
-        jsonRoles.forEach(role -> roles.add(roleRepository.findById(role.getId()).get()));
-        broker.setRoles(roles);
-        return broker;
+    public void setRoles(Broker broker) {
+        List<Role> roles = broker.getRoles();
+        roles.forEach(role -> {
+            BrokerRoles brokerRoles = new BrokerRoles();
+            brokerRoles.setBrokerId(broker.getBrokerId());
+            brokerRoles.setRoleId(role.getId());
+            brokerRolesRepository.save(brokerRoles);
+        });
+    }
+
+    public LoginResponse handleLoginResponse(Optional<Broker> broker, LoginResponse loginResponse) {
+        if (loginResponse.getJwt().equalsIgnoreCase("wrong password")) {
+            loginResponse.setJwt(null);
+            Constants.jwt=null;
+            loginResponse.setStatus(false);
+            loginResponse.setStatusMessage("invalid user name or password");
+            return loginResponse;
+        }
+        if (!broker.isPresent()) {
+            loginResponse.setJwt(null);
+            Constants.jwt=null;
+            loginResponse.setStatus(false);
+            loginResponse.setStatusMessage("account is not found");
+            return loginResponse;
+        } else {
+            loginResponse.setStatus(true);
+            loginResponse.setStatusMessage("account is active");
+            loginResponse.setBroker(broker.get());
+            return loginResponse;
+        }
     }
 }

@@ -25,7 +25,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Entry points
         http.authorizeRequests()
-                .antMatchers("/signin", "/sign-up").permitAll()
+                .antMatchers("/login", "/sign-up","/apartment/**").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();
         // Disable CSRF (cross site request forgery)
@@ -47,7 +47,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/configuration/**")//
                 .antMatchers("/webjars/**")//
                 .antMatchers("/public");
-        web.ignoring().antMatchers(String.valueOf(HttpMethod.OPTIONS), "/**");
 
 //        web.ignoring().antMatchers(String.valueOf(HttpMethod.GET), "/**")
 //                .antMatchers(String.valueOf(HttpMethod.POST), "/**")

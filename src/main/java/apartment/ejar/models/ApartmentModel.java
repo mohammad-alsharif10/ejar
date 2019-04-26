@@ -3,6 +3,9 @@ package apartment.ejar.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import java.util.Date;
+
 @Getter
 @Setter
 public class ApartmentModel extends Model {
@@ -24,5 +27,9 @@ public class ApartmentModel extends Model {
     private Integer locationId;
 
     private Integer brokerId;
+
+      private String createdBy;
+
+      private Date createdOn;
 
 }

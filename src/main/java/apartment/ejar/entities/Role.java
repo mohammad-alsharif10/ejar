@@ -1,5 +1,6 @@
 package apartment.ejar.entities;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/location")
 public class LocationController {
 
     private LocationFeign locationFeign;
@@ -30,16 +30,7 @@ public class LocationController {
         return locationFeign.insert(location);
     }
 
-    //    @Autowired
-//    Uploads uploads;
-//
-//    @RequestMapping(value = "/newUpload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<Object>
-//    newEntityUpload(@RequestParam(required = true, value = "image") MultipartFile file)
-//            throws IOException {
-//        String path = uploads.convertFile(file, "hello");
-//        return new ResponseEntity<>(path, HttpStatus.OK);
-//    }
+
 
 }
 

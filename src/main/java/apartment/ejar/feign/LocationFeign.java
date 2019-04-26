@@ -23,7 +23,7 @@ public interface LocationFeign {
     Resources<LocationModel> getLocations(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    Resource<LocationModel> getLocationById(@PathVariable("id") Long id);
+    Resource<LocationModel> getLocationById(@PathVariable("id") Integer id);
 
 
 }

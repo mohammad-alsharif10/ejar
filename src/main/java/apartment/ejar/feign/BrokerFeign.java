@@ -16,12 +16,12 @@ public interface BrokerFeign {
     Broker insert(@RequestBody Broker broker);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resource<PageAndSize> getPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resource<PageAndSize> getPage(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resources<BrokerModel> getBrokers(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resources<BrokerModel> getBrokers(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    Resource<BrokerModel> getLocationById(@PathVariable("id") Long id);
+    Resource<BrokerModel> getBrokerById(@RequestHeader("Authorization") String jwt, @PathVariable("id") Integer id);
 
 }

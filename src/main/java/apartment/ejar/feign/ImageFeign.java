@@ -14,14 +14,14 @@ public interface ImageFeign {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/")
-    Image insert(@RequestBody Image image);
+    Image insert(@RequestHeader("Authorization") String jwt, @RequestBody Image image);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resource<PageAndSize> getPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resource<PageAndSize> getPage(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resources<ImageModel> getImages(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resources<ImageModel> getImages(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    Resource<ImageModel> getLocationById(@PathVariable("id") Long id);
+    Resource<ImageModel> getImageById(@RequestHeader("Authorization") String jwt, @PathVariable("id") Integer id);
 }

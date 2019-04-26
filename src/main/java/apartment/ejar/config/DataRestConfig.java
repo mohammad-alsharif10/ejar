@@ -1,6 +1,6 @@
 package apartment.ejar.config;
 
-import apartment.ejar.entities.Location;
+import apartment.ejar.entities.*;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,8 @@ public class DataRestConfig extends RepositoryRestMvcConfiguration {
 
     @Override
     public RepositoryRestConfiguration repositoryRestConfiguration() {
-        return super.repositoryRestConfiguration().exposeIdsFor(Location.class).setReturnBodyOnCreate(true).setReturnBodyOnUpdate(true);
+        return super.repositoryRestConfiguration().exposeIdsFor(Location.class).setReturnBodyOnCreate(true).setReturnBodyOnUpdate(true)
+                .exposeIdsFor(Broker.class).exposeIdsFor(Role.class).exposeIdsFor(Image.class).exposeIdsFor(Apartment.class);
     }
 //     @Bean
 //    protected LinkCollector linkCollector() {

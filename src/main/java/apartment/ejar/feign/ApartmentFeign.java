@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "apartment-services", url = "http://localhost:8080/apartments")
 public interface ApartmentFeign {
 
-
     @RequestMapping(method = RequestMethod.POST, path = "/")
-    Apartment insert(@RequestBody Apartment apartment);
+    Apartment insert(@RequestHeader("Authorization") String jwt,
+                     @RequestBody Apartment apartment);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resource<PageAndSize> getPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resource<PageAndSize> getPage(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    Resources<ApartmentModel> getApartments(@RequestParam("page") Integer page, @RequestParam("size") Integer size);
+    Resources<ApartmentModel> getApartments(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    Resource<ApartmentModel> getLocationById(@PathVariable("id") Long id);
+    Resource<ApartmentModel> getApartmentById(@RequestHeader("Authorization") String jwt, @PathVariable("id") Integer id);
 }
