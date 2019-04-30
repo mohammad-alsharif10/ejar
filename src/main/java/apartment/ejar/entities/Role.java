@@ -1,5 +1,6 @@
 package apartment.ejar.entities;
 
+import io.swagger.annotations.ApiModel;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "roles")
+@ApiModel
 public class Role implements GrantedAuthority {
 
 

@@ -1,5 +1,6 @@
 package apartment.ejar.entities;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "brokers")
+@ApiModel
 public class Broker extends BaseEntity {
 
     @Id

@@ -1,5 +1,6 @@
 package apartment.ejar.entities;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "images")
+@ApiModel
 public class Image extends BaseEntity {
 
     @Id

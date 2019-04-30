@@ -1,5 +1,6 @@
 package apartment.ejar.models;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
+@ApiModel
 public class ApartmentModel extends Model {
 
     private Float area;
