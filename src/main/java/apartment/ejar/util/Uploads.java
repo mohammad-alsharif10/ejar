@@ -24,9 +24,10 @@ public class Uploads {
         return imagePath;
     }
 
-    public String uploadApartmentImages(MultipartFile file, String name) throws IOException {
-        new File(Constants.apartmentsPath + name).mkdir();
-        String imagePath = Constants.apartmentsPath + name + "\\" + LoginResponse.getLoginResponse().getBroker().getUsername()
+    public String uploadApartmentImages(MultipartFile file, String name, Integer apartmentId) throws IOException {
+        new File(Constants.apartmentsPath + name + apartmentId.toString()).mkdir();
+        String imagePath = Constants.apartmentsPath + name + apartmentId.toString() + "\\" +
+                LoginResponse.getLoginResponse().getBroker().getUsername()
                 + file.getOriginalFilename();
         File convertFile = new File(imagePath);
         FileOutputStream fileOutputStream = new FileOutputStream(convertFile);

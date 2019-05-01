@@ -1,8 +1,8 @@
 package apartment.ejar.controllers;
 
 
-import apartment.ejar.entities.Location;
 import apartment.ejar.feign.LocationFeign;
+import apartment.ejar.models.LocationModel;
 import apartment.ejar.models.Paging;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +26,9 @@ public class LocationController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST, produces = "application/json")
-    public Location save(@RequestBody Location location) {
+    public LocationModel save(@RequestBody LocationModel location) {
         return locationFeign.insert(location);
     }
-
 
 
 }

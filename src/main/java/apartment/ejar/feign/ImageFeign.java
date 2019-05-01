@@ -1,7 +1,6 @@
 package apartment.ejar.feign;
 
 
-import apartment.ejar.entities.Image;
 import apartment.ejar.models.ImageModel;
 import apartment.ejar.models.PageAndSize;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,7 +13,7 @@ public interface ImageFeign {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/")
-    Image insert(@RequestHeader("Authorization") String jwt, @RequestBody Image image);
+    ImageModel insert(@RequestHeader("Authorization") String jwt, @RequestBody ImageModel image);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
     Resource<PageAndSize> getPage(@RequestHeader("Authorization") String jwt, @RequestParam("page") Integer page, @RequestParam("size") Integer size);

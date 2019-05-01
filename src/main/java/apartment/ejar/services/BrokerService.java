@@ -1,8 +1,8 @@
 package apartment.ejar.services;
 
 import apartment.ejar.controllers.jwtController.LoginResponse;
-import apartment.ejar.entities.Image;
 import apartment.ejar.feign.ImageFeign;
+import apartment.ejar.models.ImageModel;
 import apartment.ejar.security.EjarDetailsService;
 import apartment.ejar.util.Constants;
 import apartment.ejar.util.Uploads;
@@ -24,7 +24,7 @@ public class BrokerService {
     public void uploadApartmentImages(MultipartFile image) throws IOException {
         String userName = ejarDetailsService.loadUserByJwtTokenAndDatabase(LoginResponse.getLoginResponse().getJwt()).get().getUsername();
         String imagePath = uploads.saveProfileImage(image, userName);
-        Image savedImage = new Image();
+        ImageModel savedImage = new ImageModel();
         savedImage.setPath(imagePath);
         imageFeign.insert(Constants.jwt, savedImage);
     }

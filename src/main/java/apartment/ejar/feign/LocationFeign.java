@@ -1,7 +1,6 @@
 package apartment.ejar.feign;
 
 
-import apartment.ejar.entities.Location;
 import apartment.ejar.models.LocationModel;
 import apartment.ejar.models.PageAndSize;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public interface LocationFeign {
 
     @RequestMapping(method = RequestMethod.POST, path = "/")
-    Location insert(@RequestBody Location location);
+    LocationModel insert(@RequestBody LocationModel location);
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
     Resource<PageAndSize> getPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size);

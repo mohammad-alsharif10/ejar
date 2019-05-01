@@ -24,11 +24,12 @@ public class ApartmentEventHandler {
     public void handleBeforeCreate(Apartment apartment) {
         auditing.createdBy(apartment);
         auditing.createdOn(apartment);
+        apartment.setLocationId(locationRepository.findByArabicNameIn(apartment.getAddress()).getLocationId());
+        apartment.setBrokerId(brokerRepository.findByUsername(apartment.getCreatedBy()).get().getBrokerId());
     }
 
     @HandleAfterCreate
     public void handleAfterCreate(Apartment apartment) {
-//        apartment.setLocationId(locationRepository.findByArabicNameContaining(apartment.getAddress()).getLocationId());
-        apartment.setBrokerId(brokerRepository.findByUsername(apartment.getCreatedBy()).get().getBrokerId());
+
     }
 }

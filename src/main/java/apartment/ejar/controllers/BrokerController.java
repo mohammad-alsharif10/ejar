@@ -32,7 +32,7 @@ public class BrokerController {
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public Broker save(@RequestBody Broker broker) {
-        return brokerFeign.insert( broker);
+        return brokerFeign.insert(broker);
     }
 
     @RequestMapping(value = "/upload-image", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

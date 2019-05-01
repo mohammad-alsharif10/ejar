@@ -1,7 +1,7 @@
 package apartment.ejar.controllers;
 
-import apartment.ejar.entities.Apartment;
 import apartment.ejar.feign.ApartmentFeign;
+import apartment.ejar.models.ApartmentModel;
 import apartment.ejar.models.Paging;
 import apartment.ejar.services.ApartmentService;
 import apartment.ejar.util.Constants;
@@ -30,7 +30,7 @@ public class ApartmentController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public Apartment save(@RequestBody Apartment apartment) {
+    public ApartmentModel save(@RequestBody ApartmentModel apartment) {
         return apartmentFeign.insert(Constants.jwt, apartment);
     }
 

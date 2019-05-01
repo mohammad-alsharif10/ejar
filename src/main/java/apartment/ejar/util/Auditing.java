@@ -16,16 +16,15 @@ public class Auditing {
 
     private EjarDetailsService ejarDetailsService;
 
-    public BaseEntity createdOn(BaseEntity baseEntity) {
+    public void createdOn(BaseEntity baseEntity) {
         LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(  localDateTime.getHour());
         Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
         baseEntity.setCreatedOn(date);
-        return baseEntity;
     }
 
-    public BaseEntity createdBy(BaseEntity baseEntity) {
+    public void createdBy(BaseEntity baseEntity) {
         baseEntity.setCreatedBy(ejarDetailsService.loadUserByJwtTokenAndDatabase
                 (LoginResponse.getLoginResponse().getJwt()).get().getUsername());
-        return baseEntity;
     }
 }
