@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 @AllArgsConstructor
@@ -35,9 +34,8 @@ public class ApartmentController {
     }
 
     @RequestMapping(value = "/upload-images/{id}", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object>
-    uploadApartmentImages(@RequestParam(required = true, value = "images") MultipartFile[] images, @PathVariable("id") Integer id)
-            throws IOException {
+    public ResponseEntity<Object> uploadApartmentImages
+            (@RequestParam(required = true, value = "images") MultipartFile[] images, @PathVariable("id") Integer id) {
         apartmentService.uploadApartmentImages(images, id);
         return ResponseEntity.status(HttpStatus.OK).body("images uploaded");
     }

@@ -17,8 +17,8 @@ public class DataRestConfig extends RepositoryRestMvcConfiguration {
 
     @Override
     public RepositoryRestConfiguration repositoryRestConfiguration() {
-        return super.repositoryRestConfiguration().exposeIdsFor(Location.class).setReturnBodyOnCreate(true).setReturnBodyOnUpdate(true)
-                .exposeIdsFor(Broker.class).exposeIdsFor(Role.class).exposeIdsFor(Image.class).exposeIdsFor(Apartment.class);
+        return super.repositoryRestConfiguration().exposeIdsFor(Location.class).exposeIdsFor(Broker.class).exposeIdsFor(Role.class)
+                .exposeIdsFor(Image.class).exposeIdsFor(Apartment.class).setReturnBodyOnCreate(true).setReturnBodyOnUpdate(true);
     }
 //     @Bean
 //    protected LinkCollector linkCollector() {

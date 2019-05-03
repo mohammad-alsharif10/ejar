@@ -2,6 +2,7 @@ package apartment.ejar.controllers;
 
 
 import apartment.ejar.entities.Broker;
+import apartment.ejar.feign.ApartmentFeign;
 import apartment.ejar.feign.BrokerFeign;
 import apartment.ejar.models.Paging;
 import apartment.ejar.services.BrokerService;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class BrokerController {
 
     private BrokerFeign brokerFeign;
+    private ApartmentFeign apartmentFeign;
     private BrokerService brokerService;
 
     @RequestMapping(path = "/all", method = RequestMethod.GET, produces = "application/json")
@@ -43,4 +45,10 @@ public class BrokerController {
         return ResponseEntity.status(HttpStatus.OK).body("images uploaded");
     }
 
+    @RequestMapping(path = "/apartments", method = RequestMethod.GET, produces = "application/json")
+    public Paging apartments(@RequestParam("username") String username,
+                             @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        return new Paging<>(new ArrayList<>(apartmentFeign.getApartmentsByBroker(Constants.jwt, username, page, size).getContent()),
+                apartmentFeign.getPage(Constants.jwt, page, size).getContent().getPage());
+    }
 }

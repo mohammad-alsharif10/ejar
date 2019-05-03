@@ -5,6 +5,7 @@ import apartment.ejar.entities.Broker;
 import apartment.ejar.entities.Role;
 import apartment.ejar.feign.BrokerFeign;
 import apartment.ejar.repositories.BrokerRepository;
+import apartment.ejar.security.EjarDetailsService;
 import apartment.ejar.services.jwtService.EjarService;
 import apartment.ejar.util.Auditing;
 import apartment.ejar.util.Constants;
@@ -28,6 +29,7 @@ public class UserController {
     private EjarService ejarService;
     private Auditing auditing;
     private BrokerRepository brokerRepository;
+    private EjarDetailsService ejarDetailsService;
 
 
     @RequestMapping(path = "/sign-up", method = RequestMethod.POST)
@@ -49,6 +51,8 @@ public class UserController {
         Optional<Broker> user = brokerRepository.findByUsername(loginDto.getUsername());
         String jwt = ejarService.signin(loginDto.getUsername(), loginDto.getPassword()).orElse("wrong password");
         loginResponse.setJwt(jwt);
+        Constants.username = ejarDetailsService.loadUserByJwtTokenAndDatabase
+                (LoginResponse.getLoginResponse().getJwt()).get().getUsername();
         Constants.jwt = Constants.bearer + jwt;
         return ejarService.handleLoginResponse(user, loginResponse);
     }

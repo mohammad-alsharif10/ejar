@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class ImageController {
 
     private ImageFeign imageFeign;
-    private Constants constants;
 
     @RequestMapping(path = "/all", produces = "application/hal+json", method = RequestMethod.GET)
     public Paging images(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {

@@ -10,4 +10,5 @@ public class Constants {
     public static String type = "application/json";
     static String apartmentsPath = "E:\\courses\\start-up\\photos\\apartments\\";
     static String profilePath = "E:\\courses\\start-up\\photos\\profiles\\";
+    public static String username;
 }

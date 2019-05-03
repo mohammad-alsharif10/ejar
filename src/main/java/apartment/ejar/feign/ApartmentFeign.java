@@ -23,4 +23,8 @@ public interface ApartmentFeign {
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     Resource<ApartmentModel> getApartmentById(@RequestHeader("Authorization") String jwt, @PathVariable("id") Integer id);
+
+    @RequestMapping(method = RequestMethod.GET, path = "/search/created-by")
+    Resources<ApartmentModel> getApartmentsByBroker(@RequestHeader("Authorization") String jwt, @RequestParam("username") String username
+            , @RequestParam("page") Integer page, @RequestParam("size") Integer size);
 }

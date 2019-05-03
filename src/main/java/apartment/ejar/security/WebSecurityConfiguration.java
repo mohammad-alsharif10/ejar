@@ -1,6 +1,5 @@
 package apartment.ejar.security;
 
-import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // Entry points
         http.authorizeRequests()
-                .antMatchers("/login", "/sign-up","/apartment/**").permitAll()
+                .antMatchers("/login", "/sign-up", "/apartment/**,/broker/**,/image/**,/location/**").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();
         // Disable CSRF (cross site request forgery)
@@ -46,7 +45,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html")//
                 .antMatchers("/configuration/**")//
                 .antMatchers("/webjars/**")//
-                .antMatchers("/public");
+                .antMatchers("/public")
+                .antMatchers("/broker/**")
+                .antMatchers("/browser/**")
+                .antMatchers("/apartment/**")
+                .antMatchers("/image/**")
+                .antMatchers("/location/**");
+
 
 //        web.ignoring().antMatchers(String.valueOf(HttpMethod.GET), "/**")
 //                .antMatchers(String.valueOf(HttpMethod.POST), "/**")
